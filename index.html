@@ -127,14 +127,6 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
     <p class="say" id="say_balloon"></p><button class="btn" data-next type="button" hidden id="n_balloon">下一关 →</button>
   </div></section>
 
-  <section class="stage" id="s_dress" hidden><div class="wrap">
-    <h1 class="tt">寿星换装间</h1><span class="hint">把道具拖到他身上，至少 3 件，再拍照</span>
-    <div class="gbox" id="g_dress"><div class="start"><button class="btn" type="button">开始打扮</button></div></div>
-    <button class="btn cy" type="button" id="snapbtn">拍照</button>
-    <div id="dresspic"></div>
-    <p class="say" id="say_dress"></p><button class="btn" data-next type="button" hidden id="n_dress">下一关 →</button>
-  </div></section>
-
   <section class="stage" id="s_whack" hidden><div class="wrap">
     <h1 class="tt">蛋糕里长出了寿星</h1><span class="hint">冒头就拍，30 秒拍满 24 下，别拍胖橘</span>
     <div class="gbox" id="g_whack"><div class="ghud"><span id="wk_s">0 / 24</span><span id="wk_t">30</span></div><div class="start"><button class="btn" type="button">开拍</button></div></div>
@@ -142,8 +134,8 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
   </div></section>
 
   <section class="stage" id="s_slot" hidden><div class="wrap">
-    <h1 class="tt">生日拼脸机</h1><span class="hint">点一下停一条，三条拼成同一张脸算中奖，中 2 次过关</span>
-    <div class="gbox" id="g_slot"><div class="ghud"><span id="sl_j">中奖 0 / 2</span><span id="sl_n">剩 12 次</span></div><div class="start"><button class="btn" type="button">投币</button></div></div>
+    <h1 class="tt">生日拼脸机</h1><span class="hint">点一下停一条，三条拼成同一张脸算中奖，5 次内中 1 次过关</span>
+    <div class="gbox" id="g_slot"><div class="ghud"><span id="sl_j">中奖 0 / 1</span><span id="sl_n">剩 5 次</span></div><div class="start"><button class="btn" type="button">投币</button></div></div>
     <div class="strip" id="slotstrip"></div>
     <p class="say" id="say_slot"></p><button class="btn" data-next type="button" hidden id="n_slot">下一关 →</button>
   </div></section>
@@ -152,18 +144,6 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
     <h1 class="tt">吸氧吹蜡烛</h1><span class="hint">按住吸氧，松手吹。一口气吹灭全部蜡烛，吸太满会飘走</span>
     <div class="gbox" id="g_blow"><div class="ghud"><span id="bl_b">剩 5 口气</span><span></span></div><div class="start"><button class="btn" type="button">戴上面罩</button></div></div>
     <p class="say" id="say_blow"></p><button class="btn" data-next type="button" hidden id="n_blow">下一关 →</button>
-  </div></section>
-
-  <section class="stage" id="s_flappy" hidden><div class="wrap">
-    <h1 class="tt">飞吧寿星</h1><span class="hint">点屏幕往上飞，穿过 12 对蜡烛</span>
-    <div class="gbox" id="g_flappy"><div class="ghud"><span id="fl_s">0 / 12</span><span></span></div><div class="start"><button class="btn" type="button">起飞</button></div></div>
-    <p class="say" id="say_flappy"></p><button class="btn" data-next type="button" hidden id="n_flappy">下一关 →</button>
-  </div></section>
-
-  <section class="stage" id="s_catch" hidden><div class="wrap">
-    <h1 class="tt">张嘴接蛋糕</h1><span class="hint">左右拖动，吃满 20 块，躲开蜡烛、+1 岁和胖橘</span>
-    <div class="gbox" id="g_catch"><div class="ghud"><span id="ct_s">0 / 20</span><span id="ct_l">♥♥♥</span></div><div class="start"><button class="btn" type="button">张嘴</button></div></div>
-    <p class="say" id="say_catch"></p><button class="btn" data-next type="button" hidden id="n_catch">下一关 →</button>
   </div></section>
 
   <section class="stage" id="s_clones" hidden><div class="wrap">
@@ -178,12 +158,6 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
     <h1 class="tt">切蛋糕，别切寿星</h1><span class="hint">划屏幕切蛋糕，切到寿星的脸会扣命</span>
     <div class="gbox" id="g_slice"><div class="ghud"><span id="sc_s">0 / 30</span><span id="sc_l">♥♥♥</span></div><div class="start"><button class="btn" type="button">拔刀</button></div></div>
     <p class="say" id="say_slice"></p><button class="btn" data-next type="button" hidden id="n_slice">下一关 →</button>
-  </div></section>
-
-  <section class="stage" id="s_stack" hidden><div class="wrap">
-    <h1 class="tt">人体叠叠乐</h1><span class="hint">寿星都躺平了。点一下放下，叠到虚线那么高，掉 3 个就输</span>
-    <div class="gbox" id="g_stack"><div class="ghud"><span id="st_s">掉了 0 / 3</span><span></span></div><div class="start"><button class="btn" type="button">开叠</button></div></div>
-    <p class="say" id="say_stack"></p><button class="btn" data-next type="button" hidden id="n_stack">下一关 →</button>
   </div></section>
 
   <section class="stage" id="s_launch" hidden><div class="wrap">
@@ -212,7 +186,6 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
     <div class="gbox" id="g_finale"><div class="start"><p>最后一关没有输赢</p><button class="btn" type="button">端上蛋糕</button></div></div>
     <div class="row"><button class="btn pk" type="button" id="sing">再唱一遍</button><button class="btn wh" type="button" id="restart">从头再玩</button></div>
     <div class="wishes" id="wishes"></div>
-    <div class="polaroid" id="finalpic" hidden><img alt="寿星换装照" id="finalpicimg"><p>今日寿星造型</p></div>
     <div class="gallery" id="gallery"></div>
     <p class="sig" id="sig"></p>
   </div></section>
@@ -492,17 +465,17 @@ function runGame(key, startOpts){
 }
 
 /* ---------- flow ---------- */
-const LV = ['gift', 'balloon', 'dress', 'whack', 'slot', 'blow', 'flappy', 'catch', 'clones', 'slice', 'stack', 'launch', 'jump', 'run', 'finale'];
+const LV = ['gift', 'balloon', 'whack', 'slot', 'blow', 'clones', 'slice', 'launch', 'jump', 'run', 'finale'];
 const stages = LV.map(k => $('#s_' + k));
 const enter = {}, STATE = {cleared:new Set(), fails:{}, skips:0, snaps:[]};
 let cur = 0;
-(function cakeHud(){ const c = $('#hudcake'); for (let i = 0; i < 15; i++) c.appendChild(document.createElement('i')); })();
+(function cakeHud(){ const c = $('#hudcake'); for (let i = 0; i < LV.length; i++) c.appendChild(document.createElement('i')); })();
 function hud(){ $$('#hudcake i').forEach((c, i) => c.classList.toggle('on', STATE.cleared.has(LV[i]))); }
 function go(i, intro){
   if (CUR) CUR.stop(); $('#modal').hidden = true; BGM.level(LV[i]);
   const show = () => {
     stages.forEach((s, k) => s.hidden = k !== i); stages[i].scrollTop = 0; cur = i;
-    $('#hudlv').textContent = `第 ${i + 1}/15 关`;
+    $('#hudlv').textContent = `第 ${i + 1}/${LV.length} 关`;
     const k = LV[i], st = $('#g_' + k) && $('#g_' + k).querySelector('.start'); if (st) st.hidden = false;
     const nx = $('#n_' + k); if (nx) nx.hidden = true; const sy = $('#say_' + k); if (sy) sy.textContent = '';
     enter[k] && enter[k]();
@@ -583,8 +556,8 @@ const BGM = (() => {
       lead:'B5/4 D6/4 G6/4 D6/4  E6/4 D6/4 B5/8  C6/4 E6/4 G6/4 E6/4  F#6/4 E6/4 D6/8 ' +
            'B5/2 C6/2 D6/4 G6/4 F#6/4  E6/4 G6/4 B5/8  C6/4 A5/4 E6/4 D6/4  A5/4 C6/4 D6/8'}
   };
-  const LVTRACK = {gift:'party', balloon:'party', dress:'party', whack:'circus', slot:'circus',
-    blow:'funk', flappy:'funk', catch:'funk', clones:'spy', slice:'spy', stack:'spy',
+  const LVTRACK = {gift:'party', balloon:'party', whack:'circus', slot:'circus',
+    blow:'funk', clones:'spy', slice:'spy',
     launch:'hype', jump:'hype', run:'run', finale:'box'};
 
   const bar = (p, b) => p == null ? null : typeof p === 'string' ? p : p[b % p.length];
@@ -846,70 +819,6 @@ GAMES.balloon = {
   }
 };
 
-/* ========== 3 · 寿星换装间 ========== */
-const PROPS = [
-  {k:'hat', s:70}, {k:'shades', s:80}, {k:'flower', s:80}, {k:'chain', s:90}, {k:'sash', s:120},
-  {k:'cathead', s:110}, {k:'crown', s:70}, {k:'cake', s:80}, {k:'o2', s:80}
-];
-function drawProp(cx, k, x, y, s, t){
-  cx.save(); cx.translate(x, y);
-  if (k === 'hat') drawHat(cx, 0, s*.45, s*.62, '#ff4fa3', 0);
-  else if (k === 'shades'){ cx.fillStyle = '#111'; rr(cx, -s*.48, -s*.14, s*.42, s*.3, s*.1); cx.fill(); rr(cx, s*.06, -s*.14, s*.42, s*.3, s*.1); cx.fill(); cx.fillRect(-s*.08, -s*.1, s*.16, s*.05);
-    cx.fillStyle = 'rgba(255,255,255,.5)'; cx.fillRect(-s*.4, -s*.08, s*.1, s*.05); cx.fillRect(s*.14, -s*.08, s*.1, s*.05); }
-  else if (k === 'flower'){ for (let i = 0; i < 8; i++){ const a = i*Math.PI/4; cx.beginPath(); cx.ellipse(Math.cos(a)*s*.22, Math.sin(a)*s*.22, s*.2, s*.13, a, 0, 7); cx.fillStyle = '#ff3b3b'; cx.fill(); ink(cx, 2); }
-    cx.beginPath(); cx.arc(0, 0, s*.14, 0, 7); cx.fillStyle = '#ffd93d'; cx.fill(); ink(cx, 2);
-    cx.fillStyle = '#ff3b3b'; cx.beginPath(); cx.moveTo(-s*.1, s*.2); cx.lineTo(-s*.25, s*.55); cx.lineTo(-s*.05, s*.45); cx.lineTo(s*.05, s*.45); cx.lineTo(s*.25, s*.55); cx.lineTo(s*.1, s*.2); cx.fill(); ink(cx, 2); }
-  else if (k === 'chain'){ cx.strokeStyle = '#d4a017'; cx.lineWidth = s*.07; cx.beginPath(); cx.arc(0, -s*.25, s*.42, .2*Math.PI, .8*Math.PI); cx.stroke();
-    cx.beginPath(); cx.arc(0, s*.25, s*.16, 0, 7); cx.fillStyle = '#ffd93d'; cx.fill(); ink(cx, 2); cx.fillStyle = '#1d1033'; cx.font = `bold ${s*.18}px sans-serif`; cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText('寿', 0, s*.26); }
-  else if (k === 'sash'){ cx.rotate(-.55); rr(cx, -s*.5, -s*.1, s, s*.2, 4); cx.fillStyle = '#ff3b3b'; cx.fill(); ink(cx, 2); cx.fillStyle = '#ffd93d'; cx.font = `bold ${s*.13}px sans-serif`; cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText('今日寿星', 0, 1); }
-  else if (k === 'cathead'){ const im = SP.acat; if (im.naturalWidth){ const w = s, h = s*240/300; cx.drawImage(im, 0, 30, 300, 240, -w/2, -h/2, w, h); } }
-  else if (k === 'crown'){ cx.beginPath(); cx.moveTo(-s*.45, s*.25); cx.lineTo(-s*.45, -s*.2); cx.lineTo(-s*.22, s*.02); cx.lineTo(0, -s*.32); cx.lineTo(s*.22, s*.02); cx.lineTo(s*.45, -s*.2); cx.lineTo(s*.45, s*.25); cx.closePath(); cx.fillStyle = '#ffd93d'; cx.fill(); ink(cx, 2.5);
-    [-.45, 0, .45].forEach(dx => { cx.beginPath(); cx.arc(dx*s, dx ? -s*.2 : -s*.32, s*.06, 0, 7); cx.fillStyle = '#ff4fa3'; cx.fill(); }); }
-  else if (k === 'cake') drawCake(cx, 0, s*.4, s*.8, s*.6, {tiers:2, candles:1, t});
-  else if (k === 'o2'){ rr(cx, -s*.15, -s*.45, s*.3, s*.9, s*.1); cx.fillStyle = '#b8a6f5'; cx.fill(); ink(cx, 2.5); cx.fillStyle = '#ddd'; cx.fillRect(-s*.07, -s*.56, s*.14, s*.12); cx.fillStyle = '#1d1033'; cx.font = `bold ${s*.15}px sans-serif`; cx.textAlign = 'center'; cx.fillText('O₂', 0, s*.05); }
-  cx.restore();
-}
-GAMES.dress = {
-  init(g){ Object.assign(g, {placed:[], drag:null, trayH:118, down0:null}); },
-  slots(g){ const n = PROPS.length, cols = 5, cw = g.W/cols; return PROPS.map((p, i) => ({p, x:cw*(i % cols + .5) + (i >= cols ? cw/2 : 0), y:g.H - g.trayH + 30 + Math.floor(i/cols)*56})); },
-  down(g, x, y){
-    if (y > g.H - g.trayH){ const s = this.slots(g).find(s => Math.hypot(s.x - x, s.y - y) < 30); if (s){ g.drag = {k:s.p.k, x, y, sc:1, s:s.p.s, fresh:true}; S.squeak(700); } return; }
-    for (let i = g.placed.length - 1; i >= 0; i--){ const p = g.placed[i]; if (Math.hypot(p.x - x, p.y - y) < p.s*p.sc*.5){ g.drag = p; g.placed.splice(i, 1); g.down0 = [x, y]; return; } }
-  },
-  move(g, x, y){ if (g.drag){ g.drag.x = x; g.drag.y = y; } },
-  up(g, x, y){
-    if (!g.drag) return; const p = g.drag; g.drag = null;
-    if (y > g.H - g.trayH){ S.whoosh(); return; }
-    if (!p.fresh && g.down0 && Math.hypot(x - g.down0[0], y - g.down0[1]) < 6){ p.sc = p.sc === 1 ? 1.4 : p.sc === 1.4 ? .7 : 1; S.boing(); }
-    p.fresh = false; g.placed.push(p); g.down0 = null; S.pop(); confetti(g, x, y, 10, 200);
-    $('#say_dress').textContent = g.placed.length < 3 ? `已穿 ${g.placed.length} 件，至少 3 件才能拍` : `已穿 ${g.placed.length} 件，可以拍照了。点一下道具能换大小。`;
-  },
-  draw(g, cx){
-    const {W, H} = g, tH = g.trayH; partyBg(cx, W, H, g.t, '#fff0f8', '#ffe9c7'); drawBunting(cx, W, 12, g.t);
-    for (let i = 0; i < 4; i++) drawBalloon(cx, 30 + i*((W - 60)/3), 70 + Math.sin(g.t*2 + i)*6 + (i % 2)*18, 18, COLS[i]);
-    const hh = (H - tH)*.86; spr(cx, SP.b16, W/2, H - tH - 4, hh, {ay:1});
-    g.placed.forEach(p => drawProp(cx, p.k, p.x, p.y, p.s*p.sc, g.t));
-    if (!g.noTray){
-      cx.fillStyle = '#1d1033'; cx.fillRect(0, H - tH, W, tH);
-      this.slots(g).forEach(s => { cx.beginPath(); cx.arc(s.x, s.y, 25, 0, 7); cx.fillStyle = '#fff4e0'; cx.fill(); drawProp(cx, s.p.k, s.x, s.y, 40, g.t); });
-    }
-    if (g.drag) drawProp(cx, g.drag.k, g.drag.x, g.drag.y, g.drag.s*g.drag.sc, g.t);
-  }
-};
-$('#snapbtn').addEventListener('click', () => {
-  const g = CUR; ac();
-  if (!g || g.key !== 'dress'){ $('#say_dress').textContent = '先点「开始打扮」'; return; }
-  if (g.placed.length < 3){ $('#say_dress').textContent = '至少穿 3 件再拍'; S.bad(); return; }
-  g.noTray = true; flash(); noise(.08, .5, 0, 5000, true);
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    const dpr = g.cv.width/g.W, oc = document.createElement('canvas'), h = (g.H - g.trayH)*dpr; oc.width = g.cv.width; oc.height = h;
-    oc.getContext('2d').drawImage(g.cv, 0, 0, g.cv.width, h, 0, 0, g.cv.width, h);
-    const url = oc.toDataURL('image/jpeg', .85); STATE.snaps.dress = url; g.noTray = false;
-    $('#dresspic').innerHTML = `<div class="polaroid"><img alt="寿星换装照" src="${url}"><p>今日寿星造型 · 已存档</p></div>`;
-    win('dress', '造型已存档，最后一关会用到。');
-  }));
-});
-
 /* ========== 4 · 蛋糕打地鼠 ========== */
 GAMES.whack = {
   init(g){ Object.assign(g, {score:0, time:30, moles:[], spawn:.6, swing:null, done:false}); $('#wk_s').textContent = '0 / 24'; $('#wk_t').textContent = '30'; },
@@ -980,8 +889,8 @@ const FACES = ['a13', 'a15', 'a16', 'a11', 'a17', 'acat'];
 const BANDS = [[0, 146], [146, 234], [234, 380]];
 GAMES.slot = {
   init(g){
-    Object.assign(g, {bands:BANDS.map(() => ({pos:rand(0, 6), v:0, stop:false, snap:null})), stage:0, spins:12, jack:0, wait:0, done:false, spin:0});
-    $('#sl_j').textContent = '中奖 0 / 2'; $('#sl_n').textContent = '剩 12 次'; $('#slotstrip').innerHTML = ''; this.spinUp(g);
+    Object.assign(g, {bands:BANDS.map(() => ({pos:rand(0, 6), v:0, stop:false, snap:null})), stage:0, spins:5, jack:0, wait:0, done:false, spin:0, second:false});
+    $('#sl_j').textContent = '中奖 0 / 1'; $('#sl_n').textContent = '剩 5 次'; $('#slotstrip').innerHTML = ''; this.spinUp(g);
   },
   spinUp(g){ g.stage = 0; g.spin++; const base = 3.0*(1 + g.spin*.06); g.bands.forEach((b, i) => { b.v = base*(1 + (i - 1)*.14)*(i % 2 ? -1 : 1); b.stop = false; b.snap = null; }); },
   down(g){
@@ -1010,9 +919,15 @@ GAMES.slot = {
           ctext(g, g.W/2, g.H*.3, ids[0] === 5 ? '原装胖橘！' : '原装焱新！', '#ffd93d', 42);
         } else if (ids[0] === ids[1] || ids[1] === ids[2] || ids[0] === ids[2]){ ctext(g, g.W/2, g.H*.3, '差一点', '#fff', 34); S.bad(); }
         else { ctext(g, g.W/2, g.H*.3, pick(['缝合怪诞生', '这是谁', '五官离家出走', '新品种寿星']), '#ff4fa3', 34); S.kazoo(220, .4); }
-        $('#sl_j').textContent = `中奖 ${g.jack} / 2`; $('#sl_n').textContent = `剩 ${g.spins} 次`;
-        if (g.jack >= 2){ g.done = true; win('slot', '中了 2 次大奖。下面那排是拼出来的新品种。'); }
-        else if (g.spins <= 0){ g.done = true; fail('slot', '投币用完了', '拼脸机吞了你所有的硬币，只吐出一堆缝合怪。'); }
+        $('#sl_j').textContent = `中奖 ${g.jack} / 1`; $('#sl_n').textContent = `剩 ${g.spins} 次` + (g.second ? '（续命中）' : '');
+        if (g.jack >= 1){ g.done = true; win('slot', '原装焱新拼回来了。下面那排是拼出来的新品种。'); }
+        else if (g.spins <= 0 && !g.second){
+          g.second = true; g.spins = 5;
+          g.after(() => { ctext(g, g.W/2, g.H*.42, '寿星心软了：再给 5 次', '#ffd93d', 30); S.horn(); BGM.duck(.9, .35); confetti(g, g.W/2, g.H*.2, 40, 420);
+            $('#sl_n').textContent = '剩 5 次（续命中）'; }, 650);
+          g.after(() => this.spinUp(g), 1900);
+        }
+        else if (g.spins <= 0){ g.done = true; fail('slot', '两轮硬币都吞了', '拼脸机只吐出一堆缝合怪，原装寿星不知所踪。'); }
         else g.after(() => this.spinUp(g), 700);
       }
     }
@@ -1096,107 +1011,6 @@ GAMES.blow = {
     const fillH = gh*g.gauge; cx.fillStyle = g.over > 0 ? '#ff3b3b' : g.gauge > .92 ? '#4fd18b' : '#2fe0d4'; rr(cx, gx + 3, gy + gh - fillH, 12, fillH, 6); cx.fill();
     cx.fillStyle = '#fff'; cx.font = 'bold 11px sans-serif'; cx.textAlign = 'left'; cx.fillText('肺', gx + 1, gy - 6);
     if (!g.holding && !g.wind && !g.done && !g.fly) canvasTitle(cx, '按住吸 · 松手吹', W*.62, H*.18, 22, '#fff');
-  }
-};
-
-/* ========== 7 · 飞吧寿星 ========== */
-GAMES.flappy = {
-  init(g){ Object.assign(g, {x:g.W*.28, y:g.H*.45, vy:0, pipes:[], passed:0, dead:false, started:false, cakes:0, splat:0, sx:0}); this.spawn(g, g.W + 30); this.spawn(g, g.W + 260); $('#fl_s').textContent = '0 / 12'; },
-  spawn(g, x){ const gap = Math.max(150, g.H*.31), top = rand(g.H*.12, g.H*.88 - gap - 30); g.pipes.push({x, top, gap, passed:false, cake:Math.random() < .55}); },
-  down(g){ if (g.dead) return; g.started = true; g.vy = -340; S.squeak(800); },
-  update(g, dt){
-    if (!g.started){ g.y = g.H*.45 + Math.sin(g.t*4)*10; return; }
-    g.vy += 1150*dt; g.y += g.vy*dt;
-    if (g.dead){ if (g.y > g.H + 80 && !g.failed){ g.failed = true; fail('flappy', '被蜡烛烫到了', `飞过了 ${g.passed} 对蜡烛，头上还挂着奶油。`); } return; }
-    const sp = 150 + g.passed*4; g.sx += sp*dt;
-    g.pipes.forEach(p => p.x -= sp*dt);
-    if (g.pipes[g.pipes.length - 1].x < g.W - 230) this.spawn(g, g.W + 30);
-    g.pipes = g.pipes.filter(p => p.x > -80);
-    const r = 22, PW = 46;
-    for (const p of g.pipes){
-      if (!p.passed && p.x + PW < g.x - r){ p.passed = true; g.passed++; S.coin(); $('#fl_s').textContent = `${g.passed} / 12`;
-        if (g.passed >= 12){ g.dead = true; g.vy = -500; g.failed = true; confetti(g, g.W/2, g.H/2, 80, 600); win('flappy', '飞过 12 对蜡烛，头发都没烧焦。'); return; } }
-      if (p.cake && Math.hypot(g.x - (p.x + PW/2), g.y - (p.top + p.gap/2)) < r + 16){ p.cake = false; g.cakes++; S.chime(1200); ctext(g, g.x, g.y - 30, '+蛋糕', '#ffd93d', 24); }
-      const inX = g.x + r*.8 > p.x && g.x - r*.8 < p.x + PW;
-      if (inX && (g.y - r*.8 < p.top + 18 || g.y + r*.8 > p.top + p.gap - 18)) return this.die(g);
-    }
-    if (g.y > g.H - 30 || g.y < -40) this.die(g);
-  },
-  die(g){ g.dead = true; g.vy = -200; g.splat = 1; S.splat(); S.bad(); shake(); cream(g, g.x, g.y, 16); ctext(g, g.x, g.y - 40, pick(['烫！', '糊了', '啊——']), '#ff3b3b', 34); },
-  draw(g, cx){
-    const {W, H} = g; partyBg(cx, W, H, g.t, '#bfefff', '#ffe1f0');
-    for (let i = 0; i < 6; i++){ const bx = ((i*137 - g.sx*.3) % (W + 80) + W + 80) % (W + 80) - 40; drawBalloon(cx, bx, 60 + (i % 3)*40 + Math.sin(g.t + i)*6, 16, COLS[i % 5]); }
-    const PW = 46;
-    g.pipes.forEach(p => {
-      cx.save(); cx.translate(p.x + PW/2, p.top); cx.scale(1, -1); drawCandle(cx, 0, 0, PW, p.top + 30, false, g.t, '#fff'); cx.restore();
-      drawFlame(cx, p.x + PW/2, p.top + 14, 12, g.t);
-      drawCandle(cx, p.x + PW/2, H - 26, PW, H - 26 - (p.top + p.gap) - 10, true, g.t, '#d6f7ff');
-      if (p.cake){ cx.save(); cx.translate(p.x + PW/2, p.top + p.gap/2 + Math.sin(g.t*4)*4); drawCake(cx, 0, 12, 34, 26, {tiers:1, sprinkles:false}); cx.restore(); }
-    });
-    cx.fillStyle = '#ff79bd'; cx.fillRect(0, H - 26, W, 26); cx.fillStyle = '#fff4e0'; for (let x = -(g.sx % 30); x < W; x += 30) cx.fillRect(x, H - 26, 15, 6);
-    cx.save(); cx.translate(g.x, g.y); cx.rotate(clamp(g.vy/900, -.5, .9) + (g.dead ? g.t*8 : 0));
-    spr(cx, SP.h17, 0, 0, 62); drawHat(cx, 4, -24, 18, '#ff4fa3', .2);
-    if (g.splat) splat(cx, 0, 0, 20, 7);
-    cx.restore();
-    if (!g.started) canvasTitle(cx, '点一下起飞', W/2, H*.25, 30, '#fff');
-  }
-};
-
-/* ========== 8 · 张嘴接蛋糕 ========== */
-GAMES.catch = {
-  init(g){ Object.assign(g, {x:g.W/2, tx:g.W/2, items:[], spawn:.6, eaten:0, lives:3, fat:1, chew:0, soot:0, grey:0, done:false}); $('#ct_s').textContent = '0 / 20'; $('#ct_l').textContent = '♥♥♥'; },
-  down(g, x){ g.tx = x; }, move(g, x){ if (g.isDown) g.tx = x; },
-  update(g, dt){
-    if (g.done) return;
-    g.x += (clamp(g.tx, 40, g.W - 40) - g.x)*Math.min(1, dt*14);
-    g.chew = Math.max(0, g.chew - dt*2.5); g.soot = Math.max(0, g.soot - dt*.15);
-    g.spawn -= dt; const k = Math.min(1, g.t/40);
-    if (g.spawn <= 0){
-      g.spawn = rand(.45, .75)*(1 - k*.4); const r = Math.random();
-      const type = r < .52 ? 'cake' : r < .6 ? 'big' : r < .74 ? 'candle' : r < .88 ? 'age' : 'cat';
-      g.items.push({type, x:rand(30, g.W - 30), y:-30, vy:rand(150, 210) + k*120, rot:rand(-1, 1), vr:rand(-2, 2)});
-    }
-    const hh = g.H*.27, hw = sprW(SP.h15, hh)*g.fat, my = g.H - 6 - hh*.36, mw = hw*.3;
-    g.items.forEach(it => {
-      it.y += it.vy*dt; it.rot += it.vr*dt;
-      if (!it.gone && it.y > my - 16 && it.y < my + 18 && Math.abs(it.x - g.x) < mw + 14){
-        it.gone = true;
-        if (it.type === 'cake' || it.type === 'big'){
-          g.eaten += it.type === 'big' ? 3 : 1; g.fat = Math.min(2.2, 1 + g.eaten*.06); g.chew = 1; S.splat(); buzz(10);
-          ctext(g, g.x, my - hh*.6, pick(['啊呜', '香', '嗝', '再来', '吃！']), '#fff', 28); cream(g, g.x, my, 6);
-          $('#ct_s').textContent = `${Math.min(20, g.eaten)} / 20`;
-          if (g.eaten >= 20){ g.done = true; STATE.snaps.fat = g.fat; win('catch', `吃了 ${g.eaten} 块，脸宽了 ${Math.round((g.fat - 1)*100)}%。生日嘛，不算胖。`); }
-        } else {
-          g.lives--; S.bad(); shake(); $('#ct_l').textContent = '♥'.repeat(Math.max(0, g.lives));
-          if (it.type === 'candle'){ g.soot = 1; ctext(g, g.x, my - hh*.6, '烫烫烫', '#ff3b3b', 30); }
-          else if (it.type === 'age'){ g.grey++; ctext(g, g.x, my - hh*.6, '又老一岁', '#ddd', 30); }
-          else ctext(g, g.x, my - hh*.6, '一嘴猫毛', '#ff8a00', 30);
-          if (g.lives <= 0){ g.done = true; fail('catch', '吃坏肚子了', `吃了 ${g.eaten} 块，但也吃了 3 样不该吃的。`); }
-        }
-      }
-    });
-    g.items = g.items.filter(it => !it.gone && it.y < g.H + 40);
-  },
-  drawItem(cx, it, t){
-    cx.save(); cx.translate(it.x, it.y); cx.rotate(it.rot);
-    if (it.type === 'cake'){ cx.beginPath(); cx.moveTo(-20, 12); cx.lineTo(20, 12); cx.lineTo(0, -18); cx.closePath(); cx.fillStyle = '#ff79bd'; cx.fill(); ink(cx, 2.5);
-      cx.beginPath(); cx.moveTo(-13, 1); cx.lineTo(13, 1); cx.lineTo(0, -18); cx.closePath(); cx.fillStyle = '#fff4e0'; cx.fill(); cx.fillStyle = '#ff3b3b'; cx.beginPath(); cx.arc(0, -16, 5, 0, 7); cx.fill(); }
-    else if (it.type === 'big') drawCake(cx, 0, 16, 46, 34, {tiers:2, candles:1, t});
-    else if (it.type === 'candle') drawCandle(cx, 0, 16, 11, 34, true, t);
-    else if (it.type === 'age'){ drawBalloon(cx, 0, 0, 20, '#9aa0a8', false); cx.fillStyle = '#1d1033'; cx.font = 'bold 15px sans-serif'; cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText('+1岁', 0, 1); }
-    else { const im = SP.acat; if (im.naturalWidth) cx.drawImage(im, 0, 20, 300, 300, -24, -24, 48, 48); }
-    cx.restore();
-  },
-  draw(g, cx){
-    const {W, H} = g; partyBg(cx, W, H, g.t, '#fff7c2', '#ffd6ec'); drawBunting(cx, W, 12, g.t);
-    g.items.forEach(it => this.drawItem(cx, it, g.t));
-    const hh = H*.27*(1 + (g.fat - 1)*.22)*(1 - g.chew*.12), w = sprW(SP.h15, H*.27)*g.fat;
-    cx.save(); spr(cx, SP.h15, g.x, H - 6, hh, {ay:1, w});
-    if (g.grey){ cx.globalAlpha = Math.min(.8, g.grey*.35); cx.fillStyle = '#e8e8e8'; for (let i = 0; i < 9; i++){ cx.fillRect(g.x - w*.3 + i*w*.07, H - 6 - hh*.98, 3, hh*.16); } cx.globalAlpha = 1; }
-    if (g.soot > 0){ cx.globalAlpha = g.soot*.7; cx.fillStyle = '#222'; [[-.15, .45], [.12, .5], [0, .7]].forEach(([a, b]) => { cx.beginPath(); cx.arc(g.x + a*w, H - 6 - hh*b, hh*.07, 0, 7); cx.fill(); }); cx.globalAlpha = 1; }
-    cx.restore();
-    drawHat(cx, g.x + w*.05, H - 6 - hh*.88, hh*.2, '#7d4dff', .15);
-    if (g.t < 2.5) canvasTitle(cx, '← 拖动 →', W/2, H*.35, 30, '#fff');
   }
 };
 
@@ -1312,64 +1126,9 @@ GAMES.slice = {
   }
 };
 
-/* ========== 11 · 人体叠叠乐 (matter.js) ========== */
+/* ---------- matter.js helpers ---------- */
 const MM = window.Matter;
 function physStep(E, dt){ const ms = Math.min(dt, .033)*1000/2; MM.Engine.update(E, ms); MM.Engine.update(E, ms); }
-const STACK_KEYS = ['b10', 'b16', 'b17', 'b13', 'b15', 'b12', 'b11'];
-GAMES.stack = {
-  init(g){
-    if (!MM){ g.noPhys = true; return; }
-    const E = MM.Engine.create(); E.gravity.y = 1.1; g.E = E; const {W, H} = g;
-    g.cakeW = Math.min(W*.7, 300); g.cakeTop = H - 74; g.pieceH = H*.2; g.goalY = g.cakeTop - g.pieceH*1.6;
-    MM.Composite.add(E.world, MM.Bodies.rectangle(W/2, g.cakeTop + 37, g.cakeW, 74, {isStatic:true, friction:1, frictionStatic:2}));
-    Object.assign(g, {pcs:[], fallen:0, cool:0, stableT:0, done:false, next:this.piece(g), drops:0});
-    MM.Events.on(E, 'collisionStart', ev => ev.pairs.forEach(p => { const v = Math.hypot(p.bodyA.velocity.x - p.bodyB.velocity.x, p.bodyA.velocity.y - p.bodyB.velocity.y); if (v > 2.5) tone(110 + Math.random()*60, .12, 'sine', Math.min(.5, v*.06), 0, .5); }));
-    $('#st_s').textContent = '掉了 0 / 3';
-  },
-  piece(g){ const key = STACK_KEYS[(g.drops || 0) % STACK_KEYS.length], h = g.pieceH*rand(.95, 1.08); return {key, h, w:sprW(SP[key], h), side:Math.random() < .5 ? 1 : -1}; },
-  down(g){
-    if (g.noPhys){ win('stack', '你的手机不支持物理引擎，寿星自己站好了。'); return; }
-    if (g.done || g.cool > 0) return;
-    const p = g.next, x = g.dropX, bw = Math.max(26, Math.min(p.w*.58, p.h*.5)), bh = p.h*.96;
-    p.body = MM.Bodies.rectangle(x, g.dropY + bw/2, bw, bh, {chamfer:{radius:4}, friction:1, frictionStatic:2.5, frictionAir:.03, restitution:0, density:.002, slop:.02});
-    MM.Body.setAngle(p.body, p.side*Math.PI/2); MM.Body.setAngularVelocity(p.body, rand(-.01, .01));
-    MM.Composite.add(g.E.world, p.body); g.pcs.push(p); g.drops++; g.cool = .8; g.next = this.piece(g);
-    S.whoosh(); ctext(g, x, 90, pick(['放！', '叠！', '稳住', '人体积木']), '#fff', 26);
-  },
-  update(g, dt){
-    if (g.noPhys) return;
-    g.dropX = g.W/2 + Math.sin(g.t*1.5)*(g.W*.3); g.cool = Math.max(0, g.cool - dt);
-    { const lv = g.pcs.filter(p => !p.out); const top = lv.length ? Math.min(...lv.map(p => p.body.bounds.min.y)) : g.cakeTop; g.dropY = lerp(g.dropY || 70, clamp(top - 150, 60, g.cakeTop - 150), Math.min(1, dt*3)); }
-    physStep(g.E, dt);
-    g.pcs.forEach(p => {
-      if (!p.out && (p.body.position.y > g.cakeTop + 50 || p.body.position.x < -60 || p.body.position.x > g.W + 60)){
-        p.out = true; g.fallen++; $('#st_s').textContent = `掉了 ${g.fallen} / 3`; S.bad(); ctext(g, clamp(p.body.position.x, 40, g.W - 40), g.H*.4, pick(['掉了一个寿星', '寿星-1', '啊——']), '#ff3b3b', 26);
-        if (g.fallen >= 3 && !g.done){ g.done = true; g.after(() => fail('stack', '寿星塔塌了', '掉下去 3 个寿星。放的时候对准塔顶中间。'), 600); }
-      }
-    });
-    const live = g.pcs.filter(p => !p.out); if (!live.length || g.done) return;
-    const top = Math.min(...live.map(p => p.body.bounds.min.y));
-    const calm = live.every(p => p.body.speed < .35 && Math.abs(p.body.angularSpeed) < .02);
-    if (top <= g.goalY && calm){ g.stableT += dt; if (g.stableT > 1.4){ g.done = true; confetti(g, g.W/2, g.goalY, 70, 500); flash(); ctext(g, g.W/2, g.goalY - 30, '够高了！', '#ffd93d', 40);
-      win('stack', `用 ${live.length} 个寿星叠到了蜡烛那么高。`); } } else g.stableT = 0;
-  },
-  draw(g, cx){
-    const {W, H} = g; partyBg(cx, W, H, g.t, '#d9f0ff', '#ffe9f4');
-    if (g.noPhys){ canvasTitle(cx, '点一下直接过关', W/2, H/2, 26); return; }
-    const gx = W - 36; drawCandle(cx, gx, g.cakeTop + 4, 18, g.cakeTop - g.goalY - 10, true, g.t, '#fff');
-    cx.setLineDash([8, 8]); cx.strokeStyle = 'rgba(29,16,51,.5)'; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(0, g.goalY); cx.lineTo(W, g.goalY); cx.stroke(); cx.setLineDash([]);
-    cx.fillStyle = '#1d1033'; cx.font = 'bold 13px sans-serif'; cx.textAlign = 'left'; cx.fillText('目标高度', 8, g.goalY - 6);
-    drawCake(cx, W/2, g.cakeTop + 74, g.cakeW, 74, {tiers:1});
-    g.pcs.forEach(p => { if (p.body.position.y > H + 200) return; spr(cx, SP[p.key], p.body.position.x, p.body.position.y, p.h, {rot:p.body.angle}); });
-    if (!g.done){
-      const p = g.next, x = g.dropX, dy = g.dropY || 70; cx.strokeStyle = '#1d1033'; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(x, dy - 34); cx.lineTo(x, dy); cx.stroke();
-      drawBalloon(cx, x - 12, dy - 48, 14, '#ff4fa3', false); drawBalloon(cx, x + 12, dy - 50, 14, '#2fe0d4', false);
-      spr(cx, SP[p.key], x, dy + p.w*.3, p.h, {alpha:g.cool > 0 ? .35 : 1, rot:p.side*Math.PI/2 + Math.sin(g.t*3)*.08});
-    }
-    if (g.stableT > 0) canvasTitle(cx, '稳住…', W/2, g.goalY - 26, 24, '#ffd93d');
-  }
-};
-
 /* ========== 12 · 发射寿星 (matter.js) ========== */
 GAMES.launch = {
   init(g){
@@ -1831,8 +1590,8 @@ document.addEventListener('keyup', e => { if (e.key === 'ArrowLeft') KEYS.left =
   window.__r3 = {R, P, act, update, reset};
 })();
 
-/* ========== 15 · 切蛋糕 + 寿星开唱 ========== */
-const WISHES = ['岁岁平安，年年都能把自己拆出来', '吹蜡烛一口气，搞钱也一口气', '吃再多蛋糕，脸也只胖一点点', '克隆人再多，真寿星只有一个',
+/* ========== 11 · 切蛋糕 + 寿星开唱 ========== */
+const WISHES = ['岁岁平安，年年都能把自己拆出来', '吹蜡烛一口气，搞钱也一口气', '拼脸机怎么转，原装的还是你', '克隆人再多，真寿星只有一个',
   '被胖橘追的人生，也要捡满蛋糕', '今年的「+1 岁」，已经全部被你砸掉了', '永远做兄弟群里最显眼的那个包'];
 const MOUTH16 = 265;
 GAMES.finale = {
@@ -1896,14 +1655,13 @@ GAMES.finale = {
 function showFinaleExtras(){
   const w = $('#wishes'); w.innerHTML = '';
   WISHES.forEach((s, i) => { const p = document.createElement('p'); p.textContent = s; p.style.animationDelay = (.2 + i*.25) + 's'; w.appendChild(p); });
-  if (STATE.snaps.dress){ $('#finalpicimg').src = STATE.snaps.dress; $('#finalpic').hidden = false; }
   const gal = $('#gallery'); gal.innerHTML = '';
   const pics = (STATE.snaps.slot || []).concat([IMG.b10, IMG.p13, IMG.cat, IMG.p11, IMG.b11, IMG.p14, IMG.h15, IMG.p10, IMG.b17]).slice(0, 12);
   pics.forEach(src => { const im = document.createElement('img'); im.src = src; im.alt = '焱新二创'; gal.appendChild(im); });
   $('#sig').textContent = '—— 来自 ' + FROM;
 }
 $('#sing').addEventListener('click', () => { ac(); const g = CUR; if (g && g.key === 'finale' && g.cut){ GAMES.finale.sing(g, 1.3); confetti(g, g.W/2, g.H*.3, 80, 600); } else { S.bad(); float(innerWidth/2, innerHeight*.6, '先切蛋糕'); } });
-$('#restart').addEventListener('click', () => { STATE.cleared.clear(); STATE.fails = {}; STATE.snaps = {}; hud(); $('#dresspic').innerHTML = ''; $('#slotstrip').innerHTML = ''; $('#finalpic').hidden = true; $('#wishes').innerHTML = ''; $('#gallery').innerHTML = ''; go(0, true); });
+$('#restart').addEventListener('click', () => { STATE.cleared.clear(); STATE.fails = {}; STATE.snaps = {}; hud(); $('#slotstrip').innerHTML = ''; $('#wishes').innerHTML = ''; $('#gallery').innerHTML = ''; go(0, true); });
 
 /* ---------- boot ---------- */
 go(0);
