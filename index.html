@@ -35,6 +35,9 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .hud .cake i{position:relative;display:block;width:7px;height:16px;border-radius:2px;background:repeating-linear-gradient(160deg,#fff 0 4px,var(--pink) 4px 8px);flex:none}
 .hud .cake i.on::after{content:"";position:absolute;left:50%;top:-10px;width:8px;height:10px;margin-left:-4px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff 0 20%,var(--yel) 35%,#ff8a00 70%,transparent 72%);animation:flick .2s infinite alternate}
 @keyframes flick{to{transform:scale(1.15,.9) rotate(4deg)}}
+.np{position:absolute;top:58px;left:50%;z-index:19;max-width:calc(100% - 32px);transform:translate(-50%,-14px);opacity:0;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--ink);color:var(--yel);border:2px solid #fff;border-radius:999px;padding:3px 14px;font-weight:700;font-size:13px;transition:opacity .25s,transform .25s}
+.np.on{opacity:1;transform:translate(-50%,0)}
+.start .snd{font-size:13px;font-weight:700;opacity:.75;margin:0}
 .mute{width:34px;height:34px;flex:none;border-radius:50%;border:2px solid #fff;background:transparent;color:#fff;font-size:13px;padding:0}
 
 /* stages */
@@ -110,10 +113,11 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 </style>
 <div id="app">
   <div class="hud"><span class="lv" id="hudlv">第 1/15 关</span><span class="cake" id="hudcake" aria-label="已点亮的蜡烛"></span><button class="mute" id="mute" type="button" aria-label="声音开关">声</button></div>
+  <div class="np" id="np" aria-live="polite"></div>
 
   <section class="stage" id="s_gift"><div class="wrap">
     <h1 class="tt">今天的快递：一个寿星</h1><span class="hint">狂点礼物盒，把寿星拆出来</span>
-    <div class="gbox" id="g_gift"><div class="start"><p>收件人：<span data-name>杨焱新</span><br>寄件人：宇宙生日管理局</p><button class="btn" type="button">签收</button></div></div>
+    <div class="gbox" id="g_gift"><div class="start"><p>收件人：<span data-name>杨焱新</span><br>寄件人：宇宙生日管理局</p><p class="snd">有 BGM，开声音玩。iPhone 记得拨开静音键</p><button class="btn" type="button">签收</button></div></div>
     <p class="say" id="say_gift"></p><button class="btn" data-next type="button" hidden id="n_gift">下一关 →</button>
   </div></section>
 
@@ -268,7 +272,7 @@ function ac(){
     noiseBuf = AC.createBuffer(1, AC.sampleRate*.8, AC.sampleRate);
     const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random()*2 - 1;
   }
-  if (AC.state === 'suspended') AC.resume();
+  if (AC.state === 'suspended' || AC.state === 'interrupted') AC.resume();
   return AC;
 }
 function tone(f, d = .15, type = 'square', v = .3, when = 0, slide = 1, env = 'pluck', vib = 0){
@@ -313,9 +317,10 @@ function bday(speed = 1, onNote){
     if (onNote) setTimeout(() => onNote(d*b), t*1000);
     t += d*b;
   });
+  BGM.duck(t + .4, 0);
   return t;
 }
-$('#mute').addEventListener('click', () => { muted = !muted; $('#mute').textContent = muted ? '静' : '声'; if (!muted){ ac(); S.chime(); } });
+$('#mute').addEventListener('click', () => { muted = !muted; $('#mute').textContent = muted ? '静' : '声'; BGM.mute(muted); if (!muted){ ac(); S.chime(); } });
 
 /* ---------- DOM effects ---------- */
 const fxEl = $('#fx');
@@ -494,7 +499,7 @@ let cur = 0;
 (function cakeHud(){ const c = $('#hudcake'); for (let i = 0; i < 15; i++) c.appendChild(document.createElement('i')); })();
 function hud(){ $$('#hudcake i').forEach((c, i) => c.classList.toggle('on', STATE.cleared.has(LV[i]))); }
 function go(i, intro){
-  if (CUR) CUR.stop(); $('#modal').hidden = true;
+  if (CUR) CUR.stop(); $('#modal').hidden = true; BGM.level(LV[i]);
   const show = () => {
     stages.forEach((s, k) => s.hidden = k !== i); stages[i].scrollTop = 0; cur = i;
     $('#hudlv').textContent = `第 ${i + 1}/15 关`;
@@ -504,7 +509,7 @@ function go(i, intro){
   };
   if (!intro) return show();
   const o = $('#intro'); $('#intro_n').textContent = `第 ${i + 1} 关`; $('#intro_t').textContent = stages[i].querySelector('.tt').textContent;
-  $('#intro_img').src = IMG[pick(['b10', 'b11', 'b16', 'b17', 'b13', 'b15'])]; o.hidden = false; S.horn();
+  $('#intro_img').src = IMG[pick(['b10', 'b11', 'b16', 'b17', 'b13', 'b15'])]; o.hidden = false; S.horn(); BGM.duck(.9, .35);
   setTimeout(() => { o.hidden = true; show(); }, 1100);
 }
 $$('[data-next]').forEach(b => b.addEventListener('click', () => { ac(); go(stages.indexOf(b.closest('.stage')) + 1, true); }));
@@ -513,7 +518,7 @@ $$('.start .btn').forEach(b => b.addEventListener('click', e => {
   const k = b.closest('.gbox').id.slice(2); runGame(k);
 }));
 function win(k, msg){
-  STATE.cleared.add(k); hud(); S.fanfare(); buzz(80);
+  STATE.cleared.add(k); hud(); S.fanfare(); BGM.duck(1.4, .25); buzz(80);
   const sy = $('#say_' + k); if (sy && msg) sy.textContent = msg;
   const nx = $('#n_' + k); if (nx){ nx.hidden = false; setTimeout(() => nx.scrollIntoView({behavior:'smooth', block:'center'}), 300); }
 }
@@ -522,13 +527,230 @@ function fail(k, title, text){
   STATE.fails[k] = (STATE.fails[k] || 0) + 1;
   $('#mimg').src = IMG[pick(HEADS)]; $('#mtitle').textContent = title; $('#mtext').textContent = text || '';
   $('#mskip').hidden = STATE.fails[k] < 2;
-  $('#modal').hidden = false; S.splat(); buzz(160);
-  $('#mretry').onclick = () => { $('#modal').hidden = true; ac(); runGame(k); };
+  $('#modal').hidden = false; S.splat(); BGM.sad(); buzz(160);
+  $('#mretry').onclick = () => { $('#modal').hidden = true; ac(); BGM.clear(); runGame(k); };
   $('#mskip').onclick = () => { $('#modal').hidden = true; STATE.skips++; STATE.cleared.add(k); hud(); go(stages.indexOf($('#s_' + k)) + 1, true); };
 }
 hud();
 $('#app').addEventListener('scroll', () => { $('#app').scrollTop = 0; });
 
+
+/* ---------- BGM: original chiptune loops, synthesized live ---------- */
+const BGM = (() => {
+  const PC = {C:0, D:2, E:4, F:5, G:7, A:9, B:11};
+  const acc = s => s === '#' ? 1 : s === 'b' ? -1 : 0;
+  const midi = n => { const m = /^([A-G])([#b]?)(-?\d)$/.exec(n); if (!m) throw Error('bad note ' + n); return PC[m[1]] + acc(m[2]) + (+m[3] + 1)*12; };
+  const hz = m => 440*Math.pow(2, (m - 69)/12);
+  const QUAL = {'':[0, 4, 7], m:[0, 3, 7], '7':[0, 4, 7, 10], m7:[0, 3, 7, 10], maj7:[0, 4, 7, 11], dim:[0, 3, 6], sus4:[0, 5, 7]};
+  const chord = c => { const m = /^([A-G])([#b]?)(.*)$/.exec(c); return {pc:(PC[m[1]] + acc(m[2]) + 12) % 12, iv:QUAL[m[3]]}; };
+
+  /* Six original loops, 8 bars of 16 steps each. Lead tokens are note/length-in-16ths. */
+  const TR = {
+    party:{title:'寿星出厂进行曲', bpm:124, lead_v:'sq', lo:-12,
+      chords:['C', 'G', 'Am', 'F', 'C', 'G', 'F', 'G'],
+      bass:'1..1..1.5..5..8.', arp:'..x...x...x...x.',
+      drums:{k:'x.......x.x.....', s:'....x.......x...', h:'..x...x...x...x.'},
+      lead:'E5/2 G5/2 C6/4 B5/2 G5/2 E5/4  D5/2 G5/2 B5/4 A5/2 G5/2 D5/4  C5/2 E5/2 A5/4 G5/2 E5/2 C5/2 E5/2  F5/4 A5/4 G5/6 r/2 ' +
+           'E5/2 E5/2 G5/2 E5/2 C6/4 r/2 C6/2  B5/2 A5/2 G5/2 A5/2 B5/4 D6/4  C6/2 A5/2 F5/2 A5/2 C6/3 D6/1 C6/2 A5/2  B5/4 G5/2 A5/2 B5/2 D6/2 G5/4'},
+    circus:{title:'胖橘马戏团', bpm:150, lead_v:'kazoo', lo:0,
+      chords:['F', 'C7', 'C7', 'F', 'F', 'Bb', 'C7', 'F'],
+      bass:'1...5...1...5...', arp:'..x...x...x...x.',
+      drums:{k:'x.......x.......', s:'....x.......x...', h:'..x...x...x...x.'},
+      lead:'A4/2 Bb4/2 B4/2 C5/6 A4/2 F4/2  G4/2 Ab4/2 A4/2 Bb4/6 G4/2 E4/2  C4/2 E4/2 G4/2 Bb4/2 Db5/2 C5/2 Bb4/2 G4/2  A4/4 F4/4 C4/4 r/4 ' +
+           'A4/2 Bb4/2 B4/2 C5/6 A4/2 C5/2  D5/2 Db5/2 D5/2 F5/6 D5/2 Bb4/2  C5/2 Bb4/2 A4/2 G4/2 F#4/2 G4/2 Bb4/2 E4/2  F4/4 C4/2 F4/2 r/8'},
+    funk:{title:'吸氧蹦迪', bpm:108, swing:.18, lead_v:'sq', lo:-12,
+      chords:['Em7', 'A7', 'Em7', 'A7', 'Em7', 'A7', 'C7', 'B7'],
+      bass:'1..8..1.5.7.8.5.', arp:'.x..x.x..x..x.x.',
+      drums:{k:'x.....x...x.....', s:'....x.......x..x', h:'x.x.x.x.x.x.x.x.', o:'.............x..'},
+      lead:'E5/1 r/1 G5/2 A5/2 r/2 B5/1 A5/1 G5/2 E5/2 r/2  r/4 C#5/2 E5/2 G5/3 F#5/1 E5/2 r/2  E5/1 r/1 G5/2 A5/2 r/2 B5/1 D6/1 B5/2 A5/2 r/2  G5/2 A5/2 E5/4 r/8 ' +
+           'B4/2 D5/2 E5/2 G5/2 E5/2 D5/2 B4/4  C#5/2 E5/2 A5/4 G5/2 E5/2 r/4  E5/2 G5/2 Bb5/4 G5/2 E5/2 C5/4  D#5/2 F#5/2 A5/2 B5/6 r/4'},
+    spy:{title:'克隆人在逃', bpm:132, lead_v:'sq', lo:-12,
+      chords:['Am', 'Am', 'F', 'E', 'Am', 'Am', 'Dm', 'E'],
+      bass:'1.11.1.11.1.11.8', arp:'0120120120120121',
+      drums:{k:'x..x..x...x..x..', s:'....x.......x...', h:'x.xxx.xxx.xxx.xx'},
+      lead:'A4/3 B4/1 C5/2 B4/2 A4/4 r/4  E5/3 D5/1 C5/2 B4/2 C5/4 r/4  F5/3 E5/1 D5/2 C5/2 A4/4 C5/4  B4/4 G#4/4 E4/4 G#4/4 ' +
+           'A4/2 C5/2 E5/2 A5/6 G5/2 E5/2  F5/2 E5/2 D#5/2 E5/6 C5/4  D5/2 F5/2 A5/4 G5/2 F5/2 E5/2 D5/2  E5/4 G#5/4 B5/4 E6/4'},
+    hype:{title:'寿星起飞 Remix', bpm:150, lead_v:'saw', lo:-12,
+      chords:['Dm', 'Bb', 'F', 'C', 'Dm', 'Bb', 'C', 'A'],
+      bass:'1818181818181818', arp:null,
+      drums:{k:'x...x...x...x...', c:'....x.......x...', o:'..x...x...x...x.'},
+      lead:'D5/2 F5/2 A5/2 D6/2 C6/2 A5/2 F5/2 A5/2  Bb5/4 A5/2 F5/2 D5/4 F5/4  C6/2 A5/2 F5/2 C5/2 F5/2 A5/2 C6/2 F6/2  E6/4 D6/2 C6/2 G5/8 ' +
+           'D6/2 C6/2 A5/2 F5/2 A5/2 C6/2 D6/4  F6/2 E6/2 D6/2 Bb5/2 D6/4 Bb5/4  C6/2 Bb5/2 A5/2 G5/2 E5/2 G5/2 C6/4  C#6/4 A5/2 E5/2 C#5/2 E5/2 A5/4'},
+    box:{title:'许愿八音盒', bpm:92, lead_v:'bell', lo:-12, nofill:true,
+      chords:['G', 'Em', 'C', 'D', 'G', 'Em', 'C', 'D'],
+      bass:'1.......5.......', arp:'0.1.2.1.0.1.2.1.',
+      drums:{},
+      lead:'B5/4 D6/4 G6/4 D6/4  E6/4 D6/4 B5/8  C6/4 E6/4 G6/4 E6/4  F#6/4 E6/4 D6/8 ' +
+           'B5/2 C6/2 D6/4 G6/4 F#6/4  E6/4 G6/4 B5/8  C6/4 A5/4 E6/4 D6/4  A5/4 C6/4 D6/8'}
+  };
+  const LVTRACK = {gift:'party', balloon:'party', dress:'party', whack:'circus', slot:'circus',
+    blow:'funk', flappy:'funk', catch:'funk', clones:'spy', slice:'spy', stack:'spy',
+    launch:'hype', jump:'hype', run:'run', finale:'box'};
+
+  const bar = (p, b) => p == null ? null : typeof p === 'string' ? p : p[b % p.length];
+  function compile(T){
+    const N = T.bars = T.chords.length, steps = N*16, ch = T.chords.map(chord);
+    T.L = new Array(steps).fill(null); let s = 0;
+    T.lead.trim().split(/\s+/).forEach(tok => { const [n, d] = tok.split('/'); if (n !== 'r') T.L[s] = {f:hz(midi(n) + T.lo), len:+d}; s += +d; });
+    T.leadSteps = s;
+    T.B = new Array(steps).fill(null); T.A = new Array(steps).fill(null);
+    const run = (p, i) => { let n = 1; while (i + n < 16 && p[i + n] === '-') n++; return n; };
+    for (let b = 0; b < N; b++){
+      const c = ch[b], bp = bar(T.bass, b), ap = bar(T.arp, b);
+      const iv = c.iv, b0 = 36 + c.pc, a0 = 60 + c.pc - (c.pc >= 6 ? 12 : 0);
+      for (let i = 0; i < 16; i++){
+        const k = bp && bp[i];
+        if (k && k !== '.' && k !== '-'){
+          const off = {'1':0, '3':iv[1], '5':iv[2], '7':iv[3] != null ? iv[3] : 10, '8':12}[k];
+          T.B[b*16 + i] = {f:hz(b0 + off), len:run(bp, i)};
+        }
+        const a = ap && ap[i];
+        if (a && a !== '.' && a !== '-'){
+          const ms = a === 'x' ? iv.slice(0, 3).map(v => a0 + v) : [a0 + iv[+a % iv.length] + 12*Math.floor(+a/iv.length)];
+          T.A[b*16 + i] = {fs:ms.map(hz), len:run(ap, i), stab:a === 'x'};
+        }
+      }
+    }
+    return T;
+  }
+  Object.values(TR).forEach(compile);
+  TR.run = Object.assign({}, TR.hype, {title:'蛋糕跑酷（加速版）', bpm:168});
+
+  /* ---- voices: all take (ctx, out, time) so the loop can also render offline ---- */
+  const NB = new WeakMap();
+  function nbuf(a){
+    let b = NB.get(a); if (b) return b;
+    b = a.createBuffer(1, a.sampleRate*.5, a.sampleRate); const d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random()*2 - 1; NB.set(a, b); return b;
+  }
+  function osc(a, out, type, f, t, d, v, o = {}){
+    const n = a.createOscillator(), g = a.createGain(); n.type = type; n.frequency.setValueAtTime(f, t);
+    if (o.slide) n.frequency.exponentialRampToValueAtTime(f*o.slide, t + d);
+    if (o.det) n.detune.value = o.det;
+    let src = n;
+    if (o.lp){ const fl = a.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = o.lp; fl.Q.value = o.q || .7; n.connect(fl); src = fl; }
+    if (o.vib){ const l = a.createOscillator(), lg = a.createGain(); l.frequency.value = o.vr || 5.5; lg.gain.value = f*o.vib; l.connect(lg); lg.connect(n.frequency); l.start(t); l.stop(t + d + .1); }
+    const at = o.at || .006;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + at);
+    if (o.hold){ g.gain.setValueAtTime(v, t + Math.max(at, d*.8)); g.gain.linearRampToValueAtTime(0, t + d); }
+    else g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    src.connect(g); g.connect(out); n.start(t); n.stop(t + d + .05);
+  }
+  function nz(a, out, t, d, v, freq, type = 'highpass'){
+    const s = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+    s.buffer = nbuf(a); f.type = type; f.frequency.value = freq;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    s.connect(f); f.connect(g); g.connect(out); s.start(t); s.stop(t + d + .02);
+  }
+  const DR = {
+    k:(a, o, t) => { osc(a, o, 'sine', 150, t, .24, .55, {slide:.3}); nz(a, o, t, .02, .12, 3000); },
+    s:(a, o, t) => { nz(a, o, t, .14, .2, 1800); osc(a, o, 'triangle', 210, t, .08, .12, {slide:.7}); },
+    c:(a, o, t) => { [0, .011, .022].forEach(x => nz(a, o, t + x, .09, .16, 1400, 'bandpass')); },
+    h:(a, o, t) => nz(a, o, t, .035, .07, 8000),
+    o:(a, o, t) => nz(a, o, t, .16, .06, 7000)
+  };
+  function leadNote(a, o, T, t, f, d, up){
+    const v = up ? .6 : 1;
+    switch (T.lead_v){
+      case 'kazoo': osc(a, o, 'sawtooth', f, t, d, .075*v, {hold:1, vib:.012, lp:2400, at:.02}); break;
+      case 'saw': osc(a, o, 'sawtooth', f, t, d, .045*v, {hold:1, lp:3200}); osc(a, o, 'sawtooth', f, t, d, .03*v, {hold:1, lp:3200, det:12}); break;
+      case 'bell': osc(a, o, 'sine', f, t, Math.max(.6, d*1.6), .13*v); osc(a, o, 'sine', f*2.01, t, .3, .04*v); break;
+      default: osc(a, o, 'square', f, t, d, .045*v, {hold:1, lp:3600, vib:.004});
+    }
+  }
+  function playStep(a, out, T, n, t, spb, pass){
+    const steps = T.bars*16, i = n % steps, b = Math.floor(i/16), j = i % 16;
+    const last = b === T.bars - 1, brk = pass === 2 && b < 4;
+    const dl = T.drums;
+    if (!brk) ['k', 's', 'c'].forEach(k => { if (dl[k] && dl[k][j] === 'x') DR[k](a, out, t); });
+    if (!T.nofill && last && j >= 12 && !(dl.s && dl.s[j] === 'x')) DR.s(a, out, t + (j === 15 ? spb*.5 : 0));
+    ['h', 'o'].forEach(k => { if (dl[k] && dl[k][j] === 'x') DR[k](a, out, t); });
+    const bs = T.B[i];
+    if (bs){ const d = bs.len*spb*.92; osc(a, out, 'sawtooth', bs.f, t, d, .1, {hold:1, lp:620, q:4}); osc(a, out, 'triangle', bs.f, t, d, .16, {hold:1}); }
+    const ar = T.A[i];
+    if (ar){ const d = Math.max(.07, ar.len*spb*(ar.stab ? .55 : .9)); ar.fs.forEach(f => T.lead_v === 'bell' ? osc(a, out, 'triangle', f, t, d*1.5, .05) : osc(a, out, 'square', f, t, d, ar.stab ? .022 : .03, {lp:2400})); }
+    const ld = T.L[i];
+    if (ld){ const d = ld.len*spb*.95; leadNote(a, out, T, t, ld.f, d); if (pass === 1) leadNote(a, out, T, t, ld.f*2, d, true); }
+  }
+
+  /* ---- live scheduler ---- */
+  const LEVEL = .9;
+  let bus = null, filt = null, T = null, n = 0, nextT = 0, sadState = false, toast = null, wantStart = false;
+  function ensure(){
+    if (bus) return true; if (!AC || !master) return false;
+    bus = AC.createGain(); bus.gain.value = muted ? 0 : LEVEL;
+    filt = AC.createBiquadFilter(); filt.type = 'lowpass'; filt.frequency.value = 18000;
+    bus.connect(filt); filt.connect(master); return true;
+  }
+  function gainTo(v, at, dur){ const g = bus.gain; g.cancelScheduledValues(at); g.setValueAtTime(g.value, at); g.linearRampToValueAtTime(v, at + dur); }
+  function tick(){
+    if (!AC || !T || muted || AC.state !== 'running' || !ensure()) return;
+    const now = AC.currentTime, spb = 60/T.bpm/4;
+    if (wantStart || nextT < now - .08){
+      if (wantStart){ gainTo(0, now, .15); bus.gain.setValueAtTime(0, now + .3); bus.gain.linearRampToValueAtTime(sadState ? LEVEL*.55 : LEVEL, now + .55); }
+      nextT = now + (wantStart ? .32 : .05); wantStart = false;
+      if (toast){ showNP(toast); toast = null; }
+    }
+    while (nextT < now + .3){
+      const steps = T.bars*16, pass = Math.floor(n/steps) % 4;
+      playStep(AC, bus, T, n, nextT + (n % 2 ? (T.swing || 0)*spb : 0), spb, pass);
+      nextT += spb; n++;
+    }
+  }
+  setInterval(tick, 50);
+  let npTimer = 0;
+  function showNP(title){
+    const el = $('#np'); if (!el) return;
+    el.textContent = '♪ 正在播放：《' + title + '》'; el.classList.add('on');
+    clearTimeout(npTimer); npTimer = setTimeout(() => el.classList.remove('on'), 2600);
+  }
+  function unmuffle(){
+    if (!sadState) return; sadState = false;
+    if (bus && AC){ const now = AC.currentTime; filt.frequency.cancelScheduledValues(now); filt.frequency.setValueAtTime(filt.frequency.value, now); filt.frequency.exponentialRampToValueAtTime(18000, now + .35); gainTo(muted ? 0 : LEVEL, now, .35); }
+  }
+  function play(name){
+    const nt = TR[name]; if (!nt) return;
+    unmuffle();
+    if (T === nt) return;
+    T = nt; n = 0; wantStart = true; toast = nt.title;
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!AC) return;
+    if (document.hidden) AC.suspend && AC.suspend(); else if (!muted) AC.resume && AC.resume();
+  });
+  return {
+    TR, LVTRACK, play,
+    level(k){ play(LVTRACK[k]); },
+    duck(sec, to = .2){
+      if (!bus || !AC || muted) return; const now = AC.currentTime, base = sadState ? LEVEL*.55 : LEVEL;
+      gainTo(base*to, now, .06); bus.gain.setValueAtTime(base*to, now + sec); bus.gain.linearRampToValueAtTime(base, now + sec + .6);
+    },
+    sad(){
+      const t0 = .05;
+      [[294, .32], [277, .32], [262, .32], [247, 1.1]].reduce((w, [f, d], i) => {
+        tone(f, d, 'sawtooth', .14, w, i === 3 ? .96 : 1, 'hold', i === 3 ? .035 : .01);
+        tone(f/2, d, 'triangle', .14, w, i === 3 ? .96 : 1, 'hold'); return w + d + .04;
+      }, t0);
+      if (!bus || !AC || muted) { sadState = true; return; }
+      const now = AC.currentTime; sadState = true;
+      gainTo(0, now, .08); bus.gain.setValueAtTime(0, now + 2.1); bus.gain.linearRampToValueAtTime(LEVEL*.55, now + 2.8);
+      filt.frequency.cancelScheduledValues(now); filt.frequency.setValueAtTime(500, now + .1);
+    },
+    clear: unmuffle,
+    mute(m){
+      if (!bus || !AC) return; const now = AC.currentTime;
+      if (m){ gainTo(0, now, .05); } else { gainTo(sadState ? LEVEL*.55 : LEVEL, now, .3); nextT = 0; }
+    },
+    render(name, secs, pass = 0){
+      const R = TR[name], sr = 22050, oc = new OfflineAudioContext(1, Math.ceil(sr*secs), sr), out = oc.createGain();
+      out.gain.value = LEVEL*.5; out.connect(oc.destination);
+      const spb = 60/R.bpm/4; let k = pass*R.bars*16;
+      for (let t = 0; t < secs - .3; t += spb, k++) playStep(oc, out, R, k, t + (k % 2 ? (R.swing || 0)*spb : 0), spb, pass);
+      return oc.startRendering();
+    },
+    get state(){ return {track:T && T.title, n, nextT, sad:sadState, bus:!!bus, ac:AC && AC.state}; }
+  };
+})();
 /* ========== 1 · 拆快递 ========== */
 GAMES.gift = {
   init(g){ Object.assign(g, {taps:0, need:11, shk:0, holes:[], opened:false, st:0, amp:0, lid:null, hat:'#7d4dff'}); },
